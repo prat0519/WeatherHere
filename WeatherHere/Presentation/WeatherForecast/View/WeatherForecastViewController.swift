@@ -29,9 +29,6 @@ class WeatherForecastViewController: UIViewController {
     private lazy var locationManager: CLLocationManager = {
         // Initialize Location Manager
         let locationManager = CLLocationManager()
-        // Configure Location Manager
-        locationManager.distanceFilter = 1000.0
-        locationManager.desiredAccuracy = 1000.0
         return locationManager
     }()
 
@@ -166,8 +163,14 @@ extension WeatherForecastViewController {
 
     private func requestCurrentLocation() {
         // Configure Location Manager
-        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        DispatchQueue.global().async { [weak self] in
+            if CLLocationManager.locationServicesEnabled() {
+                self?.locationManager.delegate = self
+                self?.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self?.locationManager.startUpdatingLocation()
+            }
+        }
     }
 
     private func fetchWeatherData() {
@@ -208,13 +211,6 @@ extension WeatherForecastViewController: CLLocationManagerDelegate {
         if let location = locations.first {
             // Update Current Location
             currentLocation = location
-
-//            // Reset Delegate
-//            manager.delegate = nil
-//
-//            // Stop Location Manager
-//            manager.stopUpdatingLocation()
-
         } else {
             // Fall Back to Default Location
             currentLocation = CLLocation(latitude: DefaultLocation.latitude, longitude: DefaultLocation.longitude)
