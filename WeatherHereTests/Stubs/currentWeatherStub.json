@@ -1,0 +1,43 @@
+{
+    "coord": {
+        "lon": -73.9352,
+        "lat": 40.7306
+    },
+    "weather": [
+        {
+            "id": 721,
+            "main": "Haze",
+            "description": "haze",
+            "icon": "50d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 295.08,
+        "feels_like": 294.37,
+        "temp_min": 292.05,
+        "temp_max": 297.38,
+        "pressure": 1005,
+        "humidity": 40
+    },
+    "visibility": 9656,
+    "wind": {
+        "speed": 4.12,
+        "deg": 310
+    },
+    "clouds": {
+        "all": 75
+    },
+    "dt": 1686247466,
+    "sys": {
+        "type": 2,
+        "id": 2002197,
+        "country": "US",
+        "sunrise": 1686216283,
+        "sunset": 1686270303
+    },
+    "timezone": -14400,
+    "id": 5125125,
+    "name": "Long Island City",
+    "cod": 200
+}
