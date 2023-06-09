@@ -137,9 +137,6 @@ extension WeatherForecastViewController {
         let title, message: String
 
         switch type {
-        case .locationNotAuthorized:
-            title = "location_authorized_error_title".localized()
-            message = "location_authorized_error_message".localized()
         case .locationRequestFailed:
             title = "location_request_error_title".localized()
             message = "location_request_error_message".localized()
@@ -265,7 +262,7 @@ extension WeatherForecastViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             // Request Location
-            manager.requestLocation()
+            locationManager.requestLocation()
         default:
             guard let cityStored = UserDefaults.standard.fetchLastCity(),
             let lat = cityStored.lat,

@@ -44,6 +44,7 @@
 		453B81132A32C0B900E7D9B3 /* NotificationName + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453B81122A32C0B800E7D9B3 /* NotificationName + Ext.swift */; };
 		453B81152A32C19300E7D9B3 /* UserDefault + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453B81142A32C19300E7D9B3 /* UserDefault + Ext.swift */; };
 		453B81172A32F06F00E7D9B3 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453B81162A32F06F00E7D9B3 /* String + Ext.swift */; };
+		453B811A2A331CD500E7D9B3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 453B81192A331CD500E7D9B3 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		453B81122A32C0B800E7D9B3 /* NotificationName + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName + Ext.swift"; sourceTree = "<group>"; };
 		453B81142A32C19300E7D9B3 /* UserDefault + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault + Ext.swift"; sourceTree = "<group>"; };
 		453B81162A32F06F00E7D9B3 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
+		453B81192A331CD500E7D9B3 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		453B807D2A31AEFD00E7D9B3 /* WeatherHere */ = {
 			isa = PBXGroup;
 			children = (
+				453B81182A331CB900E7D9B3 /* Resources */,
 				453B80B42A31AFCC00E7D9B3 /* Networking */,
 				453B80B32A31AFCB00E7D9B3 /* Presentation */,
 				453B80B52A31AFCC00E7D9B3 /* Utilities */,
@@ -347,6 +350,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		453B81182A331CB900E7D9B3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				453B81192A331CD500E7D9B3 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				453B808B2A31AEFE00E7D9B3 /* LaunchScreen.storyboard in Resources */,
+				453B811A2A331CD500E7D9B3 /* Localizable.strings in Resources */,
 				453B80882A31AEFE00E7D9B3 /* Assets.xcassets in Resources */,
 				453B80862A31AEFD00E7D9B3 /* Main.storyboard in Resources */,
 			);
@@ -683,6 +695,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W5KCMKK9XT;
@@ -712,6 +725,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W5KCMKK9XT;

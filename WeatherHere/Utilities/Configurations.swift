@@ -9,7 +9,6 @@ import UIKit
 
 // MARK: - Alert Types
 enum AlertType {
-    case locationNotAuthorized
     case locationRequestFailed
     case weatherDataNotAvailable
 }
