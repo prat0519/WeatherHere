@@ -25,7 +25,6 @@ protocol WeatherAPIServiceable {
 final class WeatherAPIService: WeatherAPIServiceable {
     enum URLError: LocalizedError {
         case invalidURL
-        
         var errorDescription: String? {
             switch self {
             case .invalidURL:
@@ -33,15 +32,14 @@ final class WeatherAPIService: WeatherAPIServiceable {
             }
         }
     }
-    //MARK: Properties
     
+    //MARK: Properties
     private let session = URLSession.shared
     private let decoder: JSONDecoder
     private let service: URLService
     private var accessKey: String
     
     //MARK: - Initialization
-    
     init(decoder: JSONDecoder, service: URLService, accessKeysHelper: AccessKeysHelper) {
         guard let key = accessKeysHelper.getKey(type: .weatherApiKey) else {
             fatalError("You must have an API key to access the data")
