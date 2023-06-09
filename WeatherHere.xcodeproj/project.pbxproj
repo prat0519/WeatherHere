@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		453B80832A31AEFD00E7D9B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453B80822A31AEFD00E7D9B3 /* ViewController.swift */; };
 		453B80862A31AEFD00E7D9B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 453B80842A31AEFD00E7D9B3 /* Main.storyboard */; };
 		453B80882A31AEFE00E7D9B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 453B80872A31AEFE00E7D9B3 /* Assets.xcassets */; };
 		453B808B2A31AEFE00E7D9B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 453B80892A31AEFE00E7D9B3 /* LaunchScreen.storyboard */; };
@@ -66,7 +65,6 @@
 
 /* Begin PBXFileReference section */
 		453B807B2A31AEFD00E7D9B3 /* WeatherHere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherHere.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		453B80822A31AEFD00E7D9B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		453B80852A31AEFD00E7D9B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		453B80872A31AEFE00E7D9B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		453B808A2A31AEFE00E7D9B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				453B80B32A31AFCB00E7D9B3 /* Presentation */,
 				453B80B52A31AFCC00E7D9B3 /* Utilities */,
 				453B80AE2A31AF2F00E7D9B3 /* Application */,
-				453B80822A31AEFD00E7D9B3 /* ViewController.swift */,
 				453B80842A31AEFD00E7D9B3 /* Main.storyboard */,
 				453B80872A31AEFE00E7D9B3 /* Assets.xcassets */,
 				453B80892A31AEFE00E7D9B3 /* LaunchScreen.storyboard */,
@@ -505,7 +502,6 @@
 				453B81032A3282AF00E7D9B3 /* SearchLocationViewModel.swift in Sources */,
 				453B810E2A328CCC00E7D9B3 /* Publisher + Ext.swift in Sources */,
 				453B80D42A31B6C700E7D9B3 /* Configurations.swift in Sources */,
-				453B80832A31AEFD00E7D9B3 /* ViewController.swift in Sources */,
 				453B81012A327C4300E7D9B3 /* SearchLocationResultViewController.swift in Sources */,
 				453B80FE2A327C1C00E7D9B3 /* WeatherForecastViewController.swift in Sources */,
 				453B81072A32875100E7D9B3 /* URLComponentService.swift in Sources */,
