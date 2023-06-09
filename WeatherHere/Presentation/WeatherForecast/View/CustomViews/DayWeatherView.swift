@@ -44,7 +44,7 @@ class DayWeatherView: UIView {
     lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 70, weight: .heavy)
+        label.font = .systemFont(ofSize: 50, weight: .heavy)
         label.textColor = .label
         label.text = "--°"
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -19,7 +19,9 @@ class WeatherCoordinator: Coordinator {
     /// Initial coordinator loaded
     func start() {
         let scene = WeatherForecastViewController()
-        scene.viewModel = WeatherForecastViewModel(apiClient: WeatherAPIService())
+        let weatherService = WeatherAPIService(decoder: JSONDecoder(), service: URLService(), accessKeysHelper: AccessKeysHelper())
+        let viewModel = WeatherForecastViewModel(weatherService: weatherService)
+        scene.viewModel = viewModel
         navigationController.pushViewController(scene, animated: true)
     }
 }

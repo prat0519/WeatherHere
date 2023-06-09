@@ -145,4 +145,8 @@ extension WeeklyWeatherView: UITableViewDataSource {
         detailsBottomSheet.weatherIconName = iconName
         self.presentBottomSheet(sheet: detailsBottomSheet)
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
 }

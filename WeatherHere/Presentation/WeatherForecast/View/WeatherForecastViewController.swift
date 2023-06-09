@@ -12,7 +12,13 @@ import CoreLocation
 class WeatherForecastViewController: UIViewController {
     
     // MARK: - Properties
-    var viewModel: WeatherForecastViewModel?
+    var viewModel: WeatherForecastViewModel! {
+        didSet {
+            setupSearchResultsController()
+            setBindings()
+        }
+    }
+    
     private var storage: Set<AnyCancellable> = []
 
     // MARK: - Weather Views
@@ -32,17 +38,74 @@ class WeatherForecastViewController: UIViewController {
         return locationManager
     }()
 
+    private lazy var locationsSearchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: SearchLocationResultViewController())
+        searchController.searchBar.tintColor = .red
+        searchController.hidesNavigationBarDuringPresentation = false
+        return searchController
+    }()
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setupObservables()
         self.requestCurrentLocation()
+        self.setupNavigationBar()
+        self.setLocalBindings()
+        addKeyboardHideTapGesture()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViews()
+    }
+
+    func setBindings() {
+        viewModel.searchResultsUpdatingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] cities in
+                guard
+                    let locationSearchResultsController = self?.locationsSearchController.searchResultsController as? SearchLocationResultViewController,
+                    let rearchResultsViewModel = locationSearchResultsController.viewModel
+                else { return }
+                rearchResultsViewModel.updateResults(with: cities)
+            }
+            .store(in: &storage)
+        
+        viewModel.addingNewLocationPublisher
+            .sink { [weak self] city in
+                guard let city = city, let lat = city.lat, let lon = city.lon else { return }
+                self?.currentLocation = CLLocation(latitude: lat, longitude: lon)
+            }
+            .store(in: &storage)
+    }
+    
+    func setLocalBindings() {
+        NotificationCenter.default.publisher(for: UISearchTextField.textDidChangeNotification, object: locationsSearchController.searchBar.searchTextField)
+            .compactMap { ($0.object as? UISearchTextField)?.text }
+            .compactMap { $0.isEmpty ? nil : $0 }
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] searchText in
+                self?.viewModel.searchCity(query: searchText)
+            }
+            .store(in: &storage)
+    }
+    
+    func setupSearchResultsController() {
+        guard let locationsSearchResultsController = locationsSearchController.searchResultsController as? SearchLocationResultViewController else { return }
+        locationsSearchResultsController.viewModel = viewModel.viewModelForLocationsSearchResultsController()
+    }
+    
+    func addKeyboardHideTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.searchController = locationsSearchController
     }
 }
 
@@ -61,7 +124,7 @@ extension WeatherForecastViewController {
             currentWeatherView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             currentWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             currentWeatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            currentWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35),
+            currentWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
 
             weeklyWeatherView.topAnchor.constraint(equalTo: currentWeatherView.bottomAnchor),
             weeklyWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -146,13 +209,19 @@ extension WeatherForecastViewController {
         DispatchQueue.main.async {
             self.currentWeatherView.locationLabel.text = "\(data.name), \(data.sys.country)"
             self.currentWeatherView.temperatureLabel.text = data.main.temp.convertTemp(to: .fahrenheit)
-            self.currentWeatherView.weatherDescriptionLabel.text = data.weather.first?.description
+            self.currentWeatherView.weatherDescriptionLabel.text = data.weather.first?.description.capitalized
 
             switch data.weather.first?.main {
-            case .clear: self.currentWeatherView.weatherIcon.image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
-            case .clouds: self.currentWeatherView.weatherIcon.image = UIImage(systemName: "cloud.fill", withConfiguration: configuration)
-            case .rain: self.currentWeatherView.weatherIcon.image = UIImage(systemName: "cloud.drizzle.fill", withConfiguration: configuration)
-            default: self.currentWeatherView.weatherIcon.image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
+            case .clear:
+                self.currentWeatherView.weatherIcon.image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
+            case .clouds:
+                self.currentWeatherView.weatherIcon.image = UIImage(systemName: "cloud.fill", withConfiguration: configuration)
+            case .rain:
+                self.currentWeatherView.weatherIcon.image = UIImage(systemName: "cloud.drizzle.fill", withConfiguration: configuration)
+            case .haze:
+                self.currentWeatherView.weatherIcon.image = UIImage(systemName: "sun.haze.circle.fill", withConfiguration: configuration)
+            default:
+                self.currentWeatherView.weatherIcon.image = UIImage(systemName: "sun.max.fill", withConfiguration: configuration)
             }
         }
     }
@@ -183,8 +252,8 @@ extension WeatherForecastViewController {
         let coordinates = Coordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
 
         // Retrieve weather data
-        viewModel.getCurrentWeatherData(at: coordinates)
-        viewModel.getWeeklyWeatherData(at: coordinates)
+        try? viewModel.getCurrentWeatherData(at: coordinates)
+        try? viewModel.getWeeklyWeatherData(at: coordinates)
     }
 }
 
@@ -197,12 +266,15 @@ extension WeatherForecastViewController: CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             // Request Location
             manager.requestLocation()
-        case .denied, .restricted:
-            // Alert User
-            showAlert(of: .locationNotAuthorized)
         default:
-            // Fall Back to Default Location
-            currentLocation = CLLocation(latitude: DefaultLocation.latitude, longitude: DefaultLocation.longitude)
+            guard let cityStored = UserDefaults.standard.fetchLastCity(),
+            let lat = cityStored.lat,
+            let long = cityStored.lon else {
+                // Alert User
+                showAlert(of: .locationRequestFailed)
+                return
+            }
+            currentLocation = CLLocation(latitude: lat, longitude: long)
         }
     }
 
@@ -212,20 +284,33 @@ extension WeatherForecastViewController: CLLocationManagerDelegate {
             // Update Current Location
             currentLocation = location
         } else {
-            // Fall Back to Default Location
-            currentLocation = CLLocation(latitude: DefaultLocation.latitude, longitude: DefaultLocation.longitude)
+            guard let cityStored = UserDefaults.standard.fetchLastCity(),
+            let lat = cityStored.lat,
+            let long = cityStored.lon else {
+                // Alert User
+                showAlert(of: .locationRequestFailed)
+                return
+            }
+            currentLocation = CLLocation(latitude: lat, longitude: long)
         }
     }
 
     // MARK: - Location Fetch Failed
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if currentLocation == nil {
-            // Fall Back to Default Location
-            currentLocation = CLLocation(latitude: DefaultLocation.latitude, longitude: DefaultLocation.longitude)
+        
+        guard let cityStored = UserDefaults.standard.fetchLastCity(),
+        let lat = cityStored.lat,
+        let long = cityStored.lon else {
+            // Alert User
+            showAlert(of: .locationRequestFailed)
+            return
         }
-
-        // Alert User
-        showAlert(of: .locationRequestFailed)
+        currentLocation = CLLocation(latitude: lat, longitude: long)
     }
 }
 
+@objc private extension WeatherForecastViewController {
+    func dismissKeyboard() {
+        locationsSearchController.searchBar.searchTextField.resignFirstResponder()
+    }
+}

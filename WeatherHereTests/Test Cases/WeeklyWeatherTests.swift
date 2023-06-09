@@ -17,7 +17,7 @@ class WeeklyWeatherTests: XCTestCase {
     var subscriptions = Set<AnyCancellable>()
 
     override func setUpWithError() throws {
-        viewModel = WeatherForecastViewModel()
+        viewModel = WeatherForecastViewModel(weatherService: WeatherAPIServiceMock())
         try loadStubData()
     }
 
@@ -40,11 +40,6 @@ class WeeklyWeatherTests: XCTestCase {
 
         // Set weather data
         weatherResponse = weatherData
-    }
-
-    /// Test validity of current weather url
-    func testCurrentWeatherUrl() {
-        XCTAssertEqual(viewModel.weeklyWeatherUrl, Services.weeklyWeatherData, "Incorrent weekly weather url")
     }
 
     /// Test that the right number of records are decoded

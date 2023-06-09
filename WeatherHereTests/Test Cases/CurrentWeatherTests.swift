@@ -17,7 +17,7 @@ class CurrentWeatherTests: XCTestCase {
     var subscriptions = Set<AnyCancellable>()
 
     override func setUpWithError() throws {
-        viewModel = WeatherForecastViewModel()
+        viewModel = WeatherForecastViewModel(weatherService: WeatherAPIServiceMock())
         try loadStubData()
     }
 
@@ -43,11 +43,6 @@ class CurrentWeatherTests: XCTestCase {
         } catch let error {
             print(error)
         }
-    }
-
-    /// Test validity of current weather url
-    func testCurrentWeatherUrl() {
-        XCTAssertEqual(viewModel.currentWeatherUrl, Services.currentWeatherData, "Incorrent current weather url")
     }
 
     /// Test weather data decoded to expected format
@@ -146,7 +141,6 @@ class CurrentWeatherTests: XCTestCase {
     }
 
     /// Ensure data is decoded quick enough and displayed to user
-    ///
     /// Current baseline is set to 0.000373 seconds
     func testDecodeDataPerformance() throws {
         // This is an example of a performance test case.
@@ -154,5 +148,4 @@ class CurrentWeatherTests: XCTestCase {
             try! loadStubData()
         }
     }
-
 }

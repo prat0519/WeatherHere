@@ -61,3 +61,13 @@ enum MainEnum: String, Decodable {
     case rain = "Rain"
     case haze = "Haze"
 }
+
+struct City: Codable, Equatable {
+    let id: Int?
+    let name: String?
+    let region: String?
+    let country: String?
+    let lat: Double?
+    let lon: Double?
+    let url: String?
+}

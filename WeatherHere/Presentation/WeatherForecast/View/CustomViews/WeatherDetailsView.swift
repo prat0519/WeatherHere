@@ -111,9 +111,7 @@ class WeatherDetailsView: UIView {
 
     private func configureWeatherDetails() {
         guard let details = weatherDetails else { return }
-
         contentStackView.safelyRemoveArrangedSubviews()
-
         details.forEach {
             let detailLabel: UILabel = {
                 let lbl = UILabel()

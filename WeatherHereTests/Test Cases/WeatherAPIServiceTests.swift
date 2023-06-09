@@ -12,11 +12,13 @@ class WeatherAPIServiceTests: XCTestCase {
 
     // MARK: - Properties
     var testURL: String?
-    var apiClientMock: WeatherAPIServiceMock?
+    var weatherAPIServiceMock: WeatherAPIServiceMock?
+    var urlServiceMock: URLServiceMock?
     var weatherResponse: WeatherResponse!
 
     override func setUpWithError() throws {
-        apiClientMock = WeatherAPIServiceMock()
+        weatherAPIServiceMock = WeatherAPIServiceMock()
+        urlServiceMock = URLServiceMock()
         testURL = "test/api"
 
         // Do a mock fetch
@@ -25,24 +27,24 @@ class WeatherAPIServiceTests: XCTestCase {
 
     override func tearDownWithError() throws {
         testURL = nil
-        apiClientMock = nil
+        weatherAPIServiceMock = nil
         weatherResponse = nil
     }
 
     func loadDataFromMockApi()  {
-
-        guard let testUrl = self.testURL else {
+        guard self.testURL != nil else {
             XCTFail("URL not found")
             return
         }
-
-        apiClientMock?.request(for: WeatherResponse.self, url: testUrl, completionHandler: { result in
-            switch result {
-            case .success(let data):
-                self.weatherResponse = data
-            case .failure(let error):
+        
+        let publisher = try? weatherAPIServiceMock?.requestData(for: WeatherResponse.self, location: (latitude: 40.730610, longitude: -73.935242), route: .weather)
+        _ = publisher?
+            .sink(receiveCompletion: { completion in
+            if case .failure(let error) = completion {
                 XCTFail(error.localizedDescription)
             }
+        }, receiveValue: { response in
+            self.weatherResponse = response
         })
     }
 
@@ -58,8 +60,14 @@ class WeatherAPIServiceTests: XCTestCase {
 
     /// Test that the url supplied is not empty
     func testUrlValidity() {
-        apiClientMock?.request(for: WeatherResponse.self, url: "", completionHandler: { result in
-            XCTAssertEqual(result, .failure(NetworkError.badURL))
-        })
+        let url = urlServiceMock?.createURL(scheme: "https", host: "api.openweathermap.org", path: "data/2.5/weather", queryParameters: [
+            "lat": "48.1371079",
+            "lon": "11.5753822",
+            "appid": "d24157b1fdda25809558f37e50ab92d9",
+        ])
+        XCTAssertEqual(url?.scheme, "https")
+        XCTAssertEqual(url?.host, "api.openweathermap.org")
+        XCTAssertEqual(url?.path, "/data/2.5/weather")
     }
 }
+
