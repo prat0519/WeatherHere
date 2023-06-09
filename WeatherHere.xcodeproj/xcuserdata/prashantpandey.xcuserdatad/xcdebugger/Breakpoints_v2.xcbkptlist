@@ -118,69 +118,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C5526C79-028D-4A23-AB95-EAF31E115B0A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "setBindings()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C5526C79-028D-4A23-AB95-EAF31E115B0A - 976baf97e52eb824"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WeatherHere.WeatherForecastViewModel.setBindings() -&gt; ()"
-                  moduleName = "WeatherHere"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashantpandey/Desktop/WeatherHere/WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131"
-                  offsetFromSymbolStart = "144">
-               </Location>
-               <Location
-                  uuid = "C5526C79-028D-4A23-AB95-EAF31E115B0A - 186cfc500d478f3a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Notification) -&gt; () in WeatherHere.WeatherForecastViewModel.setBindings() -&gt; ()"
-                  moduleName = "WeatherHere"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashantpandey/Desktop/WeatherHere/WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "129"
-                  endingLineNumber = "129"
-                  offsetFromSymbolStart = "2456">
-               </Location>
-               <Location
-                  uuid = "C5526C79-028D-4A23-AB95-EAF31E115B0A - 186cfc500d478f9f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Notification) -&gt; () in WeatherHere.WeatherForecastViewModel.setBindings() -&gt; ()"
-                  moduleName = "WeatherHere"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashantpandey/Desktop/WeatherHere/WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "124"
-                  endingLineNumber = "124"
-                  offsetFromSymbolStart = "2456">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "80FFF20E-3FAA-4706-AA5E-5C72E7B968CB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -270,54 +207,6 @@
                   startingLineNumber = "68"
                   endingLineNumber = "68"
                   offsetFromSymbolStart = "248">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CA9A2460-E1D0-431D-97D6-92CCAD25B167"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "setBindings()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CA9A2460-E1D0-431D-97D6-92CCAD25B167 - 186cfc500d478f9f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Notification) -&gt; () in WeatherHere.WeatherForecastViewModel.setBindings() -&gt; ()"
-                  moduleName = "WeatherHere"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashantpandey/Desktop/WeatherHere/WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "124"
-                  endingLineNumber = "124"
-                  offsetFromSymbolStart = "3128">
-               </Location>
-               <Location
-                  uuid = "CA9A2460-E1D0-431D-97D6-92CCAD25B167 - 186cfc500d478c60"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Notification) -&gt; () in WeatherHere.WeatherForecastViewModel.setBindings() -&gt; ()"
-                  moduleName = "WeatherHere"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prashantpandey/Desktop/WeatherHere/WeatherHere/Presentation/WeatherForecast/ViewModel/WeatherForecastViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "3128">
                </Location>
             </Locations>
          </BreakpointContent>

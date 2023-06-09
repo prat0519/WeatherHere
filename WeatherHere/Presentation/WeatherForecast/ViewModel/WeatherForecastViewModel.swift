@@ -24,9 +24,6 @@ class WeatherForecastViewModel {
     let dailyWeatherData = PassthroughSubject<WeatherResponse, Error>()
     let weeklyWeatherData = PassthroughSubject<WeeklyWeatherResponse, Error>()
 
-    // FIXIT: - Should be stored securely in the KeyChain
-    let apiKey: String = "d24157b1fdda25809558f37e50ab92d9"
-
     var searchResultsUpdatingPublisher: AnyPublisher<[City], Never> {
         $searchResults.eraseToAnyPublisher()
     }
